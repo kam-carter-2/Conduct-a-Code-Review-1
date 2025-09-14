@@ -1,0 +1,40 @@
+# Workflow Analysis
+
+## 1. What triggers this workflow to run?
+The workflow is triggered when code is **pushed to the `main` branch** or when a **pull request is opened that targets `main`**.  
+This ensures that any changes are validated and tested both before merging (PR workflow) and after they reach production (push workflow).
+
+---
+
+## 2. What are the four main steps this workflow performs?
+1. **Checkout code** – retrieves the repository code so the workflow can use it.  
+2. **Validate HTML** – runs an HTML linter to check for syntax errors.  
+3. **Check links** – ensures that no broken links exist in the code.  
+4. **Deploy to GitHub Pages** – publishes the website to GitHub Pages if the earlier checks pass.
+
+---
+
+## 3. What does the "Checkout code" step do and why is it necessary?
+The "Checkout code" step pulls down the current repository files into the GitHub Actions runner environment.  
+This is necessary because all other steps (validation, testing, deployment) depend on having access to the actual project files.
+
+---
+
+## 4. What is the purpose of the environment configuration?
+The environment configuration sets up the correct runtime environment for the workflow.  
+It ensures that dependencies (like Node.js or linters) are installed and available so the workflow runs consistently on every machine.
+
+---
+
+## 5. How does this automated deployment improve reliability compared to manual deployment?
+Automated deployment improves reliability because:  
+- It removes the chance of human error during deployment.  
+- Every commit goes through the same set of checks (validation + testing).  
+- The site is only deployed if all checks pass, ensuring stability and consistency.  
+This makes the process predictable and repeatable, unlike manual deployment.
+
+---
+
+## 6. What would happen if you pushed code to a different branch (not main)?
+If you pushed code to a branch other than `main`, the deployment workflow would **not run** (unless that branch was explicitly configured as a trigger).  
+You would need to create a pull request to merge your changes into `main` in order to trigger the validation and deployment steps.
